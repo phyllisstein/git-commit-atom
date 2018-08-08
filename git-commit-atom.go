@@ -43,7 +43,7 @@ func handle_COMMIT_EDITMSG(filename string){
   done_terminal := make(chan bool)
   setup_monitor_terminal(done_terminal)
 
-  exec.Command("/usr/local/bin/atom-nightly", "-f", filename).Run()
+  exec.Command("atom-beta", "-f", filename).Run()
   select {
    case <-done_atom:
      fmt.Println("Edit completed by Atom.")
@@ -107,7 +107,7 @@ func main(){
     if path.Base(filename) == "COMMIT_EDITMSG" || path.Base(filename) == "TAG_EDITMSG" || path.Base(filename) == "MERGE_MSG" || path.Base(filename) == "PULLREQ_EDITMSG" || path.Base(filename) == "git-rebase-todo" || path.Ext(filename) == ".diff" {
       handle_COMMIT_EDITMSG(filename)
     } else {
-      exec.Command("/usr/local/bin/atom-nightly", "--wait", filename).Run()
+      exec.Command("atom-beta", "--wait", filename).Run()
     }
     return nil
   }
